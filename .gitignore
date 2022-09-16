@@ -30,3 +30,4 @@ build
 
 # Ignore idea folder
 .idea
+.gradle/file-system.probe
