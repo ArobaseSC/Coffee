@@ -9,3 +9,5 @@
  */
 
 rootProject.name = 'Coffee'
+include 'coffee-cli'
+
