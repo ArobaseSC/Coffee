@@ -1,4 +1,4 @@
-package org.arobase.coffeeapplication;
+package org.arobase.coffeejavafx;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

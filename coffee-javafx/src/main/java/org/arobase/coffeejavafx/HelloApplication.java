@@ -1,4 +1,4 @@
-package org.arobase.coffeeapplication;
+package org.arobase.coffeejavafx;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
