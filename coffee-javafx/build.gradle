@@ -1,8 +1,8 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.13'
-    id 'org.beryx.jlink' version '2.25.0'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
+    id 'org.beryx.jlink' version '2.24.1'
 }
 
 group 'org.arobase'
@@ -16,8 +16,8 @@ ext {
     junitVersion = '5.8.2'
 }
 
-sourceCompatibility = '11'
-targetCompatibility = '11'
+sourceCompatibility = '17'
+targetCompatibility = '17'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -29,14 +29,23 @@ application {
 }
 
 javafx {
-    version = '17.0.2'
-    modules = ['javafx.controls', 'javafx.fxml']
+    version = '17.0.1'
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.web']
 }
 
 dependencies {
     implementation('org.controlsfx:controlsfx:11.1.1')
-    implementation('org.kordamp.ikonli:ikonli-javafx:12.3.1')
+    implementation('com.dlsc.formsfx:formsfx-core:11.3.2') {
+        exclude(group: 'org.openjfx')
+    }
+    implementation('net.synedra:validatorfx:0.2.1') {
+        exclude(group: 'org.openjfx')
+    }
+    implementation('org.kordamp.ikonli:ikonli-javafx:12.3.0')
     implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
+    implementation('eu.hansolo:tilesfx:11.48') {
+        exclude(group: 'org.openjfx')
+    }
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
