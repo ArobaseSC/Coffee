@@ -2,9 +2,8 @@ package org.arobase;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.arobase.service.abstraction.FailureResult;
 import org.arobase.service.abstraction.Result;
-import org.arobase.service.abstraction.SuccessResult;
+import org.arobase.service.abstraction.ResultError;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,12 +18,12 @@ import org.junit.jupiter.api.Test;
 
 class ResultTest {
 
-    private Integer nullIfIEqualsFive(final int i) {
+    private Result nullIfIEqualsFive(final int i) {
         if (i == 5) {
-            return null;
+            return Result.fromError(new ResultError("i is equal to 5"));
         }
 
-        return i;
+        return Result.fromSuccess();
     }
 
     @Test
@@ -34,10 +33,10 @@ class ResultTest {
         final var i = 5;
 
         // When
-        final var result = Result.from(nullIfIEqualsFive(i));
+        final var result = nullIfIEqualsFive(i);
 
         // Then
-        assertThat(result).isInstanceOf(FailureResult.class);
+        assertThat(Result.isSuccess(result)).isFalse();
     }
 
     @Test
@@ -47,9 +46,9 @@ class ResultTest {
         final var i = 2;
 
         // When
-        final var result = Result.from(nullIfIEqualsFive(i));
+        final var result = nullIfIEqualsFive(i);
 
         // Then
-        assertThat(result).isInstanceOf(SuccessResult.class);
+        assertThat(Result.isSuccess(result)).isTrue();
     }
 }

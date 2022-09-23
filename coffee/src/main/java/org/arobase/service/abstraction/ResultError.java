@@ -9,14 +9,15 @@ package org.arobase.service.abstraction;
  *    All rights reserved to the Arobase team members.
  ****************************************************/
 
-public class FailureResult<T extends ObjectResult> extends ResultBase<T> {
+public class ResultError {
 
-	protected FailureResult() {
-		super();
-	}
+    private final String message;
 
-	protected FailureResult(T objectType) {
-		super(objectType);
-	}
+    public ResultError(final String message) {
+        this.message = message;
+    }
 
+    public String message() {
+        return message;
+    }
 }

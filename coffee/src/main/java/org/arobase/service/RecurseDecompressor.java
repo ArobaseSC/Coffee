@@ -9,7 +9,6 @@ package org.arobase.service;
  *    All rights reserved to the Arobase team members.
  ****************************************************/
 
-import org.arobase.service.abstraction.Result;
 import org.arobase.service.factory.DecompressorServiceFactory;
 
 /**

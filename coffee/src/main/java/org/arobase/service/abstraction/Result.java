@@ -9,22 +9,23 @@ package org.arobase.service.abstraction;
  *    All rights reserved to the Arobase team members.
  ****************************************************/
 
-public abstract class Result<T extends ObjectResult> {
+public class Result {
 
-	public static <T> ResultBase from(final T returnObject) {
-		return returnObject == null ? new FailureResult<>(returnObject)
-			: new SuccessResult<>(returnObject);
-	}
+    private final ResultError error;
 
-	public static FailureResult from(final Exception exception) {
-		return new FailureResult(exception);
-	}
+    private Result(final ResultError error) {
+        this.error = error;
+    }
 
-	public static FailureResult fromFailure() {
-		return new FailureResult<>();
-	}
+    public static Result fromSuccess() {
+        return new Result(null);
+    }
 
-	public static SuccessResult fromSuccess() {
-		return new SuccessResult<>();
-	}
+    public static <T extends ResultError> Result fromError(final T error) {
+        return new Result(error);
+    }
+
+    public static boolean isSuccess(final Result result) {
+        return result.error == null;
+    }
 }

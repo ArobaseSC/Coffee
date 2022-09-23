@@ -1,7 +1,5 @@
 package org.arobase.service;
 
-import org.arobase.service.abstraction.DecompressionObjectResult;
-import org.arobase.service.abstraction.Result;
 import org.arobase.service.factory.DecompressorServiceFactory;
 
 /**
@@ -22,5 +20,5 @@ public interface DecompressorService {
      * @param source      the file to decompress
      * @param destination the destination where to decompress the file
      */
-    Result<DecompressionObjectResult> decompress(final String source, final String destination);
+    Result decompress(final String source, final String destination);
 }
