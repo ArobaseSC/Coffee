@@ -29,5 +29,5 @@ public interface RecurseDecompressor extends DecompressorService {
 	 * @param source      the folder where to find files to decompress
 	 * @param destination the destination where to decompress the files
 	 */
-	void decompress(final String source, final String destination);
+	IResult decompress(final String source, final String destination);
 }
