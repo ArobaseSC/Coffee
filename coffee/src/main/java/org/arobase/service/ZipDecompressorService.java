@@ -1,5 +1,6 @@
 package org.arobase.service;
 
+import org.arobase.service.abstraction.DecompressionObjectResult;
 import org.arobase.service.abstraction.Result;
 
 public final class ZipDecompressorService implements DecompressorService {
@@ -11,7 +12,7 @@ public final class ZipDecompressorService implements DecompressorService {
 	 * @param destination the destination where to decompress the file
 	 */
 	@Override
-	public Result decompress(String source, String destination) {
+	public Result<DecompressionObjectResult> decompress(String source, String destination) {
 		try {
 			System.out.println("Hello world");
 		} catch (Exception e) {

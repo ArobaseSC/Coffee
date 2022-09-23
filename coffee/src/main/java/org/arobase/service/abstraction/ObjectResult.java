@@ -9,14 +9,6 @@ package org.arobase.service.abstraction;
  *    All rights reserved to the Arobase team members.
  ****************************************************/
 
-public class FailureResult<T extends ObjectResult> extends ResultBase<T> {
-
-	protected FailureResult() {
-		super();
-	}
-
-	protected FailureResult(T objectType) {
-		super(objectType);
-	}
+public abstract class ObjectResult {
 
 }

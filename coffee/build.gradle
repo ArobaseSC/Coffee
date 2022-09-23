@@ -10,6 +10,8 @@ repositories {
 }
 
 dependencies {
+    implementation 'net.lingala.zip4j:zip4j:2.11.2'
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
     testImplementation 'org.assertj:assertj-core:3.23.1'

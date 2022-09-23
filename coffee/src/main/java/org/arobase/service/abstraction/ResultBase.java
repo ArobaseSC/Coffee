@@ -9,7 +9,7 @@ package org.arobase.service.abstraction;
  *    All rights reserved to the Arobase team members.
  ****************************************************/
 
-public abstract class ResultBase<T> extends Result<T>{
+public abstract class ResultBase<T extends ObjectResult> extends Result<T>{
 
 	private final T returnObject;
 
