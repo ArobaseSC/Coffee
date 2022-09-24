@@ -1,10 +1,9 @@
 package org.arobase.service;
 
 import net.lingala.zip4j.ZipFile;
-import net.lingala.zip4j.exception.ZipException;
 
-import org.arobase.service.abstraction.Result;
-import org.arobase.service.abstraction.ResultError;
+import org.arobase.abstraction.Result;
+import org.arobase.abstraction.ResultError;
 
 import java.io.IOException;
 import java.util.logging.Logger;

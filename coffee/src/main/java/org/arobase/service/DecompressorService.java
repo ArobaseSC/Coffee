@@ -1,6 +1,6 @@
 package org.arobase.service;
 
-import org.arobase.service.abstraction.Result;
+import org.arobase.abstraction.Result;
 import org.arobase.service.factory.DecompressorServiceFactory;
 
 /**

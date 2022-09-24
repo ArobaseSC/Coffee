@@ -2,8 +2,8 @@ package org.arobase;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.arobase.service.abstraction.Result;
-import org.arobase.service.abstraction.ResultError;
+import org.arobase.abstraction.Result;
+import org.arobase.abstraction.ResultError;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

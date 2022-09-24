@@ -9,6 +9,7 @@ package org.arobase.service;
  *    All rights reserved to the Arobase team members.
  ****************************************************/
 
+import org.arobase.abstraction.Result;
 import org.arobase.service.factory.DecompressorServiceFactory;
 
 /**
@@ -24,10 +25,10 @@ import org.arobase.service.factory.DecompressorServiceFactory;
 public interface RecurseDecompressor extends DecompressorService {
 
 	/**
-	 * Decompress all files inside the given folder to the given destination.
-	 *
-	 * @param source      the folder where to find files to decompress
-	 * @param destination the destination where to decompress the files
-	 */
+     * Decompress all files inside the given folder to the given destination.
+     *
+     * @param source      the folder where to find files to decompress
+     * @param destination the destination where to decompress the files
+     */
 	Result decompress(final String source, final String destination);
 }

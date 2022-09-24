@@ -1,4 +1,4 @@
-package org.arobase.service.abstraction;
+package org.arobase.abstraction;
 
 /****************************************************
  *    Copyright (c) 2022 — Arobase Team
