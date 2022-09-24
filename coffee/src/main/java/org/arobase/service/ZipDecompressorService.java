@@ -3,6 +3,10 @@ package org.arobase.service;
 import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
+import org.arobase.service.abstraction.Result;
+import org.arobase.service.abstraction.ResultError;
+
+import java.io.IOException;
 import java.util.logging.Logger;
 
 public final class ZipDecompressorService implements DecompressorService {
@@ -17,16 +21,14 @@ public final class ZipDecompressorService implements DecompressorService {
      */
     @Override
     public Result decompress(String source, String destination) {
-        final var zipFile = new ZipFile(source);
-
-        try {
+        try (final var zipFile = new ZipFile(source)){
             zipFile.extractAll(destination);
 
             return Result.fromSuccess();
-        } catch (final ZipException zipException) {
-            LOGGER.severe(zipException.getMessage());
+        } catch (final IOException exception) {
+            LOGGER.severe(exception.getMessage());
 
-            return Result.from(zipException);
+            return Result.fromError(new ResultError(exception.getMessage()));
         }
     }
 }
