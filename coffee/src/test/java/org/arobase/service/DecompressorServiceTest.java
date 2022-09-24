@@ -51,4 +51,10 @@ class DecompressorServiceTest {
     void ensureTemporaryGeneratedOutputDirectoryExists() {
         assertThat(temporaryGeneratedOutputDirectory).exists();
     }
+
+    @Test
+    @DisplayName("The temporary output folder should be empty")
+    void ensureTemporaryOutputFolderIsEmpty() {
+        assertThat(temporaryGeneratedOutputDirectory).isEmptyDirectory();
+    }
 }
