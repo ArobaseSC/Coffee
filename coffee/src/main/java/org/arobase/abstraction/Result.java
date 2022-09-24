@@ -39,10 +39,9 @@ public final class Result {
      * Create a Result from an exception.
      *
      * @param exception the exception
-     * @param <T>       the type of the exception
      * @return the result as error
      */
-    public static <T extends Exception> Result fromException(final T exception) {
+    public static Result fromException(final Exception exception) {
         return new Result(new ResultError(exception.getMessage()));
     }
 
