@@ -36,7 +36,7 @@ class ResultTest {
         final var result = nullIfIEqualsFive(i);
 
         // Then
-        assertThat(result.isSuccess()).isFalse();
+        assertThat(result.success()).isFalse();
     }
 
     @Test
@@ -49,6 +49,6 @@ class ResultTest {
         final var result = nullIfIEqualsFive(i);
 
         // Then
-        assertThat(result.isSuccess()).isTrue();
+        assertThat(result.success()).isTrue();
     }
 }

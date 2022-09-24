@@ -48,7 +48,7 @@ class ZipDecompressorServiceTest extends DecompressorServiceTest {
         final var result = zipDecompressorService.decompress(temporaryGeneratedZipFile,
             temporaryGeneratedOutputDirectory);
 
-        assertThat(result).isNotNull().isInstanceOf(Result.class).extracting(Result::isSuccess)
+        assertThat(result).isNotNull().isInstanceOf(Result.class).extracting(Result::success)
             .isEqualTo(true);
     }
 
@@ -58,7 +58,7 @@ class ZipDecompressorServiceTest extends DecompressorServiceTest {
         final var result = zipDecompressorService.decompress(new File("unexisting.zip"),
             temporaryGeneratedOutputDirectory);
 
-        assertThat(result).isNotNull().isInstanceOf(Result.class).extracting(Result::isSuccess)
+        assertThat(result).isNotNull().isInstanceOf(Result.class).extracting(Result::success)
             .isEqualTo(false);
     }
 
@@ -68,7 +68,7 @@ class ZipDecompressorServiceTest extends DecompressorServiceTest {
         final var result = zipDecompressorService.decompress(temporaryGeneratedZipFile,
             new File("thing"));
 
-        assertThat(result).isNotNull().isInstanceOf(Result.class).extracting(Result::isSuccess)
+        assertThat(result).isNotNull().isInstanceOf(Result.class).extracting(Result::success)
             .isEqualTo(true);
     }
 
@@ -78,7 +78,7 @@ class ZipDecompressorServiceTest extends DecompressorServiceTest {
         final var result = zipDecompressorService.decompress(temporaryGeneratedZipFile,
             temporaryGeneratedOutputDirectory);
 
-        assertThat(result).isNotNull().isInstanceOf(Result.class).extracting(Result::isSuccess)
+        assertThat(result).isNotNull().isInstanceOf(Result.class).extracting(Result::success)
             .isEqualTo(true);
 
         assertThat(temporaryGeneratedOutputDirectory.listFiles()).isNotNull().isNotEmpty();

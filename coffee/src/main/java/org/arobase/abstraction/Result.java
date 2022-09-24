@@ -29,7 +29,7 @@ public class Result {
         return new Result(new ResultError(exception.getMessage()));
     }
 
-    public boolean isSuccess() {
+    public boolean success() {
         return this.error == null;
     }
 }
