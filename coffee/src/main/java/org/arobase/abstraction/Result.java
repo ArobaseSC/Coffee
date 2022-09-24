@@ -25,6 +25,10 @@ public class Result {
         return new Result(error);
     }
 
+    public static <T extends Exception> Result fromException(final T exception) {
+        return new Result(new ResultError(exception.getMessage()));
+    }
+
     public boolean isSuccess() {
         return this.error == null;
     }
