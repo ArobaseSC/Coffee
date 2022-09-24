@@ -25,7 +25,7 @@ public class Result {
         return new Result(error);
     }
 
-    public static boolean isSuccess(final Result result) {
-        return result.error == null;
+    public boolean isSuccess() {
+        return this.error == null;
     }
 }
