@@ -26,7 +26,6 @@ import java.util.zip.ZipOutputStream;
 
 class DecompressorServiceTest {
 
-    @org.jetbrains.annotations.NonNls
     protected static final String ZIP_CONTENT_FILE_NAME = "quizio.txt";
     protected File temporaryGeneratedZipFile;
     protected File temporaryGeneratedOutputDirectory;
