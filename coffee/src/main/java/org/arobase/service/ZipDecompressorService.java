@@ -5,6 +5,7 @@ import net.lingala.zip4j.ZipFile;
 import org.arobase.abstraction.Result;
 import org.arobase.abstraction.ResultError;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -19,9 +20,9 @@ public final class ZipDecompressorService implements DecompressorService {
      * @param destination the destination where to decompress the file
      */
     @Override
-    public Result decompress(String source, String destination) {
+    public Result decompress(final File source, final File destination) {
         try (final var zipFile = new ZipFile(source)){
-            zipFile.extractAll(destination);
+            zipFile.extractAll(destination.getAbsolutePath());
 
             return Result.fromSuccess();
         } catch (final IOException exception) {

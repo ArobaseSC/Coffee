@@ -3,6 +3,8 @@ package org.arobase.service;
 import org.arobase.abstraction.Result;
 import org.arobase.service.factory.DecompressorServiceFactory;
 
+import java.io.File;
+
 /**
  * Represents the main abstraction service to decompress something.
  * <p>
@@ -21,5 +23,5 @@ public interface DecompressorService {
      * @param source      the file to decompress
      * @param destination the destination where to decompress the file
      */
-    Result decompress(final String source, final String destination);
+    Result decompress(final File source, final File destination);
 }
