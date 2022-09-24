@@ -1,23 +1,29 @@
 package org.arobase.abstraction;
 
-/****************************************************
- *    Copyright (c) 2022 — Arobase Team
- *
- *    This project may be licensed somewhere,
- *    you may want to check the license file in the GitHub root repository.
- *
- *    All rights reserved to the Arobase team members.
- ****************************************************/
-
+/**
+ * Represents a result that is an error.
+ * <p>
+ * It should be used in a Result context to represent an error.
+ */
 public class ResultError {
 
     private final String message;
 
-    public ResultError(final String message) {
-        this.message = message;
+    /**
+     * Creates a new ResultError.
+     *
+     * @param resultErrorMessage the error message
+     */
+    public ResultError(final String resultErrorMessage) {
+        this.message = resultErrorMessage;
     }
 
+    /**
+     * Returns the error message.
+     *
+     * @return the error message
+     */
     public String message() {
-        return message;
+        return this.message;
     }
 }

@@ -9,6 +9,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Logger;
 
+/**
+ * Concrete implementation of the {@link DecompressorService} interface.
+ * <p>
+ * It represents the service to decompress a zip file.
+ * It is used to decompress a zip file to a given destination.
+ * </p>
+ */
 public final class ZipDecompressorService implements DecompressorService {
 
     private static final Logger LOGGER = Logger.getLogger(ZipDecompressorService.class.getName());
@@ -21,7 +28,7 @@ public final class ZipDecompressorService implements DecompressorService {
      */
     @Override
     public Result decompress(final File source, final File destination) {
-        try (final var zipFile = new ZipFile(source)){
+        try (final var zipFile = new ZipFile(source)) {
             zipFile.extractAll(destination.getAbsolutePath());
 
             return Result.fromSuccess();

@@ -10,11 +10,13 @@ import java.io.File;
  * <p>
  * It should not be use directly but through the {@link DecompressorServiceFactory}.
  * The factory will return the right implementation of this service based on your needs.
- * For example, if you want to decompress a zip file, you should use the {@link ZipDecompressorService}.
+ * For example, if you want to decompress a zip file,
+ * you should use the {@link ZipDecompressorService}.
  * </p>
  *
  * @author Alexis Chân Gridel
  */
+@FunctionalInterface
 public interface DecompressorService {
 
     /**
@@ -22,6 +24,8 @@ public interface DecompressorService {
      *
      * @param source      the file to decompress
      * @param destination the destination where to decompress the file
+     * @return a {@link Result} that will be a success if the decompression succeed,
+     * otherwise it will be an error
      */
     Result decompress(final File source, final File destination);
 }

@@ -84,6 +84,6 @@ class ZipDecompressorServiceTest extends DecompressorServiceTest {
         assertThat(temporaryGeneratedOutputDirectory.listFiles()).isNotNull().isNotEmpty();
         assertThat(
             Arrays.stream(Objects.requireNonNull(temporaryGeneratedOutputDirectory.listFiles()))
-                .anyMatch(file -> file.getName().equals("quizio.txt"))).isTrue();
+                .anyMatch(file -> file.getName().equals(ZIP_CONTENT_FILE_NAME))).isTrue();
     }
 }
