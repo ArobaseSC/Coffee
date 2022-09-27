@@ -3,6 +3,8 @@ package org.arobase.service;
 import org.arobase.abstraction.Result;
 import org.arobase.service.factory.DecompressorServiceFactory;
 
+import java.io.File;
+
 /**
  * Represents the main recurse abstraction service to decompress something recursively.
  * <p>
@@ -24,5 +26,5 @@ public interface RecurseDecompressor extends DecompressorService {
      * @return a {@link Result} that will be a success if the decompression succeed,
      * otherwise it will be an error
      */
-    Result decompress(final String source, final String destination);
+    Result decompress(final File source, final File destination);
 }
