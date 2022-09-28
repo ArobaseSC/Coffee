@@ -57,7 +57,7 @@ public class RecurseZipDecompressorService implements RecurseDecompressor {
             return Result.fromSuccess();
         } else {
 
-            final Result result = zipDecompressorService.decompress(files.get(0), destination);
+            final Result result = zipDecompressorService.decompress(files.get(0), destination.toPath().resolve(files.get(0).getName().replace(".zip", "")).toFile());
 
             return result.success() ? decompressRecursive(files.subList(1, files.size()), destination) : result;
 
