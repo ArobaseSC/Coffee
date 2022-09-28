@@ -26,5 +26,5 @@ public interface RecurseDecompressor extends DecompressorService {
      * @return a {@link Result} that will be a success if the decompression succeed,
      * otherwise it will be an error
      */
-    Result decompress(final File source, final File destination);
+    Result decompress(File source, File destination);
 }
