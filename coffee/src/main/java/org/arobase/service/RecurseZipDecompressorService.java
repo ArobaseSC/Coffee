@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class RecurseZipDecompressorService implements RecurseDecompressor {
 
@@ -23,9 +24,24 @@ public class RecurseZipDecompressorService implements RecurseDecompressor {
      */
     @Override
     public Result decompress(File source, File destination) {
-        final List<File> files = Arrays.stream(Objects.requireNonNull(source.listFiles())).toList();
+        try {
+            final var tab = source.listFiles();
 
-        return this.decompressRecursive(files, destination);
+            if (tab.length == 0) {
+                return Result.fromError(new ResultError("The given directory is empty"));
+            } else {
+                final var files = Arrays.stream(Objects.requireNonNull(tab))
+                        .filter(File::isFile)
+                        .collect(Collectors.toUnmodifiableList());
+
+                return this.decompressRecursive(files, destination);
+            }
+        } catch (NullPointerException exception) {
+            LOGGER.severe(exception.getMessage());
+
+            return Result.fromError(new ResultError(exception.getMessage()));
+        }
+
     }
 
     /**
