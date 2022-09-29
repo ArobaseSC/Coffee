@@ -10,11 +10,15 @@ import java.util.Objects;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+/**
+ * TODO
+ */
 public class RecurseZipDecompressorService implements RecurseDecompressor {
 
-    private static final Logger LOGGER = Logger.getLogger(RecurseZipDecompressorService.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(
+        RecurseZipDecompressorService.class.getName());
 
-    ZipDecompressorService zipDecompressorService = new ZipDecompressorService();
+    protected final ZipDecompressorService zipDecompressorService = new ZipDecompressorService();
 
     /**
      * Decompress the given directory to the given destination.
@@ -23,20 +27,21 @@ public class RecurseZipDecompressorService implements RecurseDecompressor {
      * @param destination the destination where to decompress the file
      */
     @Override
-    public Result decompress(File source, File destination) {
+    public Result decompress(final File source, final File destination) {
         try {
             final var tab = source.listFiles();
 
-            if (tab.length == 0) {
+            Objects.requireNonNull(tab, "The source directory is empty");
+
+            if (0 == tab.length) {
                 return Result.fromError(new ResultError("The given directory is empty"));
             } else {
-                final var files = Arrays.stream(Objects.requireNonNull(tab))
-                        .filter(File::isFile)
-                        .collect(Collectors.toUnmodifiableList());
+                final var files = Arrays.stream(Objects.requireNonNull(tab)).filter(File::isFile)
+                    .collect(Collectors.toUnmodifiableList());
 
                 return this.decompressRecursive(files, destination);
             }
-        } catch (NullPointerException exception) {
+        } catch (final NullPointerException exception) {
             LOGGER.severe(exception.getMessage());
 
             return Result.fromError(new ResultError(exception.getMessage()));
@@ -52,14 +57,16 @@ public class RecurseZipDecompressorService implements RecurseDecompressor {
      * @return a {@link Result} that will be a success if the decompression succeed
      */
 
-    private Result decompressRecursive(List<File> files, File destination) {
+    private Result decompressRecursive(final List<File> files, final File destination) {
         if (files.isEmpty()) {
             return Result.fromSuccess();
         } else {
 
-            final Result result = zipDecompressorService.decompress(files.get(0), destination.toPath().resolve(files.get(0).getName().replace(".zip", "")).toFile());
+            final Result result = this.zipDecompressorService.decompress(files.get(0),
+                destination.toPath().resolve(files.get(0).getName().replace(".zip", "")).toFile());
 
-            return result.success() ? decompressRecursive(files.subList(1, files.size()), destination) : result;
+            return result.success() ? this.decompressRecursive(files.subList(1, files.size()),
+                destination) : result;
 
         }
     }
