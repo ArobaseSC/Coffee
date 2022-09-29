@@ -16,6 +16,7 @@ import java.io.File;
  *
  * @author Alexis Chân Gridel
  */
+@FunctionalInterface
 public interface RecurseDecompressor extends DecompressorService {
 
     /**
@@ -26,5 +27,5 @@ public interface RecurseDecompressor extends DecompressorService {
      * @return a {@link Result} that will be a success if the decompression succeed,
      * otherwise it will be an error
      */
-    Result decompress(File source, File destination);
+    Result decompress(final File source, final File destination);
 }
