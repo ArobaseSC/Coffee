@@ -11,7 +11,7 @@ import org.arobase.service.ZipDecompressorService;
  * It is used to decouple the creation of the DecompressorService from the client.
  * </p>
  */
-public record DecompressorServiceFactory() {
+public class DecompressorServiceFactory {
 
     /**
      * Creates a DecompressorService.
