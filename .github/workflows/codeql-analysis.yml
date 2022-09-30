@@ -31,7 +31,12 @@ jobs:
         with:
           languages: ${{ matrix.language }}
 
-      - name: Setup Gradle
+      - name: Wrapper Graddle
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: wrapper
+
+      - name: Test Gradle
         uses: gradle/gradle-build-action@v2
         with:
           arguments: test
