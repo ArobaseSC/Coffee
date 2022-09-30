@@ -1,5 +1,7 @@
 package org.arobase.abstraction;
 
+import java.util.Optional;
+
 /**
  * Represents a Result that can be either a success or an error.
  * <p>
@@ -43,6 +45,15 @@ public final class Result {
      */
     public static Result fromException(final Exception exception) {
         return new Result(new ResultError(exception.getMessage()));
+    }
+
+    /**
+     * Returns the result error associated with this result.
+     *
+     * @return the result error
+     */
+    public Optional<ResultError> getError() {
+        return Optional.ofNullable(this.error);
     }
 
     /**

@@ -18,8 +18,10 @@ import org.junit.jupiter.api.Test;
 
 class ResultTest {
 
+    protected static final String EXCEPTION_MESSAGE = "exception message";
+
     private Result nullIfIEqualsFive(final int i) {
-        if (i == 5) {
+        if (5 == i) {
             return Result.fromError(new ResultError("i is equal to 5"));
         }
 
@@ -33,7 +35,7 @@ class ResultTest {
         final var i = 5;
 
         // When
-        final var result = nullIfIEqualsFive(i);
+        final var result = this.nullIfIEqualsFive(i);
 
         // Then
         assertThat(result.success()).isFalse();
@@ -46,9 +48,24 @@ class ResultTest {
         final var i = 2;
 
         // When
-        final var result = nullIfIEqualsFive(i);
+        final var result = this.nullIfIEqualsFive(i);
 
         // Then
         assertThat(result.success()).isTrue();
+    }
+
+    @Test
+    @DisplayName("factory method from exception should return a failure result with the exception buffer")
+    void returnResultFromExceptionShouldBeFailureAndMessageShouldBeStored() {
+        // Given
+        final var exception = new Exception(EXCEPTION_MESSAGE);
+
+        // When
+        final var result = Result.fromException(exception);
+
+        // Then
+        assertThat(result.success()).isFalse();
+        assertThat(result.getError()).isPresent();
+        assertThat(result.getError().get().message()).isEqualTo(EXCEPTION_MESSAGE);
     }
 }
