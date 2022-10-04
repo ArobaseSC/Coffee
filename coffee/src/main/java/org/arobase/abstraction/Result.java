@@ -48,6 +48,27 @@ public final class Result {
     }
 
     /**
+     * Returns a Result based on the given boolean.
+     * <p>
+     * If the boolean is true, the result is a success.
+     * If the boolean is false, the result is an error.
+     * If the boolean is null, the result is null.
+     * </p>
+     *
+     * @param result       the boolean
+     * @param errorMessage the error message
+     * @return the result
+     */
+    public static Result fromBoolean(final Boolean result, final String errorMessage) {
+        if (null == result) {
+            return fromError(new ResultError("The result is null"));
+        }
+
+        return result.booleanValue() ? fromSuccess()
+            : fromError(new ResultError("The result is false"));
+    }
+
+    /**
      * Returns the result error associated with this result.
      *
      * @return the result error
