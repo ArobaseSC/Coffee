@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -42,6 +43,9 @@ class RecurseZipDecompressorServiceTest {
     private RecurseZipDecompressorService recurseZipDecompressorService;
 
     @TempDir
+    private File temporaryDirectory;
+
+    @TempDir
     private File temporaryFolder;
 
     @TempDir
@@ -49,21 +53,21 @@ class RecurseZipDecompressorServiceTest {
 
     @BeforeEach
     void setUp() throws IOException {
-        this.temporaryGeneratedZipFile1 = Files.createTempFile(this.temporaryFolder.toPath(),
-            "test1",
-            ".zip").toFile();
+        this.temporaryGeneratedZipFile1 = File.createTempFile("test", ".zip", temporaryFolder);
 
-        this.temporaryGeneratedZipFile2 = Files.createTempFile(this.temporaryFolder.toPath(),
-            "test2",
-            ".zip").toFile();
+        this.temporaryGeneratedZipFile2 = File.createTempFile("test2",".zip", temporaryFolder);
 
-        this.temporaryGeneratedZipFile3 = Files.createTempFile(this.temporaryFolder.toPath(),
-            "test3",
-            ".zip").toFile();
+        this.temporaryGeneratedZipFile3 = File.createTempFile("test3",".zip", temporaryFolder);
 
-        this.temporaryGeneratedZipFile4 = Files.createTempFile(this.temporaryFolder.toPath(),
-            "test4",
-            ".zip").toFile();
+        this.temporaryGeneratedZipFile4 = File.createTempFile("test4",".zip", temporaryFolder);
+
+        Files.createDirectory(temporaryFolder.toPath().resolve("output"));
+
+        this.temporaryGeneratedZipFile1.deleteOnExit();
+        this.temporaryGeneratedZipFile2.deleteOnExit();
+        this.temporaryGeneratedZipFile3.deleteOnExit();
+        this.temporaryGeneratedZipFile4.deleteOnExit();
+
 
         try (final var zipOutputStream = new ZipOutputStream(
             new FileOutputStream(this.temporaryGeneratedZipFile1))) {
