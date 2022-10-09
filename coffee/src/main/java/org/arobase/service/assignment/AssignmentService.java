@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 public class AssignmentService {
 
-    public Result isTestAssigmentFile(final String source) {
+    public final Result isTestAssigmentFile(final String source) {
         try {
             final var allLines = Files.readAllLines(new File(source).toPath());
             final var isTestAssignment = allLines.stream().anyMatch(line -> line.contains("@Test"));
@@ -33,7 +33,7 @@ public class AssignmentService {
         }
     }
 
-    public Collection<File> getTestAssignmentFiles(final String source) {
+    public final Collection<File> getTestAssignmentFiles(final String source) {
         try (final var stream = Files.walk(new File(source).toPath())) {
             return stream.map(Path::toFile).filter(File::isFile)
                 .filter(file -> this.isTestAssigmentFile(file.getAbsolutePath()).success())
@@ -41,5 +41,20 @@ public class AssignmentService {
         } catch (final IOException ioException) {
             return Collections.emptyList();
         }
+    }
+
+    public final Result isCompiled(final String source) {
+        final var isCompiled = source.endsWith(".class");
+
+        return Result.fromBoolean(Boolean.valueOf(isCompiled), "The file is not compiled.");
+    }
+
+    public final Result valid(final String source) {
+        final var isTestAssignmentFile = this.isTestAssigmentFile(source);
+        final var isCompiled = this.isCompiled(source);
+
+        return Result.fromBoolean(
+            Boolean.valueOf(isTestAssignmentFile.success() && isCompiled.success()),
+            "The file is not a valid test assignment file.");
     }
 }
