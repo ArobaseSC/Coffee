@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 
 public class AssignmentService {
 
+    protected static final String NOT_A_VALID_TEST_ASSIGNMENT_FILE = "The file is not a valid test assignment file.";
     private static final String CLASS_FILE_EXTENSION = ".class";
 
     public final Result isTestAssigmentFile(final String source) {
@@ -54,9 +55,34 @@ public class AssignmentService {
     public final Result valid(final String source) {
         final var isTestAssignmentFile = this.isTestAssigmentFile(source);
         final var isCompiled = this.isCompiled(source);
+        final var isFile = new File(source).isFile();
 
         return Result.fromBoolean(
-            Boolean.valueOf(isTestAssignmentFile.success() && isCompiled.success()),
-            "The file is not a valid test assignment file.");
+            Boolean.valueOf(isTestAssignmentFile.success() && isCompiled.success() && isFile),
+            NOT_A_VALID_TEST_ASSIGNMENT_FILE);
+    }
+
+    //FIXME: Should be dispatch to another class ASAP for SRP
+    public Result compile(final String source) {
+        if (!this.valid(source).success()) {
+            return Result.fromBoolean(Boolean.FALSE, NOT_A_VALID_TEST_ASSIGNMENT_FILE);
+        }
+
+        if (this.isCompiled(source).success()) {
+            return Result.fromBoolean(Boolean.TRUE, "The file is already compiled.");
+        }
+
+        final var file = new File(source);
+        final var processBuilder = new ProcessBuilder("javac", file.getAbsolutePath());
+        final Process process;
+
+        try {
+            process = processBuilder.start();
+            process.waitFor();
+        } catch (final IOException | InterruptedException ioException) {
+            return Result.fromException(ioException);
+        }
+
+        return Result.fromBoolean(Boolean.TRUE, "The file is compiled.");
     }
 }
