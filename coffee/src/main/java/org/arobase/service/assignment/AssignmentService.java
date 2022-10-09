@@ -21,6 +21,8 @@ import java.util.stream.Collectors;
 
 public class AssignmentService {
 
+    private static final String CLASS_FILE_EXTENSION = ".class";
+
     public final Result isTestAssigmentFile(final String source) {
         try {
             final var allLines = Files.readAllLines(new File(source).toPath());
@@ -44,7 +46,7 @@ public class AssignmentService {
     }
 
     public final Result isCompiled(final String source) {
-        final var isCompiled = source.endsWith(".class");
+        final var isCompiled = source.endsWith(CLASS_FILE_EXTENSION);
 
         return Result.fromBoolean(Boolean.valueOf(isCompiled), "The file is not compiled.");
     }
